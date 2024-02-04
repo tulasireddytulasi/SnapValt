@@ -13,6 +13,10 @@ class Assets {
   static const String highQualityIcon = "assets/icons/high_quality_icon.svg";
   static const String theatersIcon = "assets/icons/theaters_icon.svg";
 
+  /// Images
+  static const String girl = "assets/images/beauty.jpeg";
+
+
   /// Lottie Animations
   static const String pinkLoader = "assets/lottie/pink_loader.json";
   static const String blueLoader = "assets/lottie/blue_loader.json";

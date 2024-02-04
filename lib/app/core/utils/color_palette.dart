@@ -40,4 +40,9 @@ class ColorPalette {
   );
 
   static const Color red = Color(0xFFEB1C1C);
+  static const Color primary = Color(0xFF272b34);
+  static const Color primaryContainer = Color(0xff2e333d);
+  static const Color primaryContainer2 = Color(0xff2b3039);
+  static const Color green = Color(0xFF54c251);
+
 }

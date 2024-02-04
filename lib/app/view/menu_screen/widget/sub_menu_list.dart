@@ -45,7 +45,7 @@ class SubMenuList extends StatelessWidget {
                 }
               },
               child: MenuItem(
-                label: labels[index],
+                name: labels[index],
                 isSelectedItem: isSelectedItem,
                 margin: EdgeInsets.only(
                   left: (maxWidth >= 700 && maxWidth <= 940) ? 0 : 40,

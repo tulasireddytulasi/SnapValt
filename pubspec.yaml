@@ -55,6 +55,7 @@ flutter:
     - assets/icons/
     - assets/themes/
     - assets/lottie/
+    - assets/images/
 
   fonts:
     - family: MontserratRegular

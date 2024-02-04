@@ -39,12 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
         bool isDesktopScreen = isDesktop(screenWidth: constraints.maxWidth);
         return Scaffold(
           key: _scaffoldKey,
-          backgroundColor: ColorPalette.whitePrimaryColor,
+          backgroundColor: ColorPalette.whitePrimaryColor.shade100,
           appBar: isDesktopScreen
-              ? const PreferredSize(
-                  preferredSize: Size.fromHeight(70.0),
-                  child: DesktopAppBar(),
-                )
+              ? null
+          // const PreferredSize(
+          //         preferredSize: Size.fromHeight(70.0),
+          //         child: DesktopAppBar(),
+          //       )
               : AppBar(
                   backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                   actions: const [],
@@ -73,10 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Center(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Center(
                     child: Container(
                       width: getCardWidth(screenWidth: constraints.maxWidth),
                       margin: isDesktopScreen ? const EdgeInsets.only(left: 20, right: 20, bottom: 20) : null,
@@ -85,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return isDesktopScreen
                               ? Card(
                                   elevation: 0,
+                                  color: ColorPalette.whitePrimaryColor.shade100,
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(20.0),
@@ -106,8 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

@@ -1,12 +1,12 @@
+import 'package:snapvalt/app/core/utils/color_palette.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class MenuItem extends StatefulWidget {
   const MenuItem({
     super.key,
-    required this.label,
+    required this.name,
     required this.isSelectedItem,
     this.icon = "",
     this.margin = EdgeInsets.zero,
@@ -15,7 +15,7 @@ class MenuItem extends StatefulWidget {
   });
 
   final String icon;
-  final String label;
+  final String name;
   final bool isSelectedItem;
   final EdgeInsetsGeometry margin;
   final TextStyle textStyle;
@@ -29,70 +29,92 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: widget.margin,
-      decoration: widget.isSelectedItem
-          ? ShapeDecoration(
-        gradient: LinearGradient(
-          begin: const Alignment(-1, 0),
-          end: const Alignment(1.00, -0.00),
-          colors: [
-            themeProvider.colorScheme!.background,
-            themeProvider.colorScheme!.background.withOpacity(0),
-          ],
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-      )
-          : null,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Visibility(
-            visible: widget.icon.isNotEmpty,
-            child: SizedBox(
-              width: 24,
-              height: 24,
-              child: SvgPicture.asset(
-                widget.icon,
-                fit: BoxFit.contain,
-                colorFilter: ColorFilter.mode(
-                  widget.isSelectedItem ? themeProvider.colorScheme!.primary : themeProvider.colorScheme!.secondary,
-                  BlendMode.srcIn,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+          margin: widget.margin,
+          decoration: widget.isSelectedItem
+              ? ShapeDecoration(
+                  gradient: LinearGradient(
+                    begin: const Alignment(-1, 0),
+                    end: const Alignment(1.00, -0.00),
+                    colors: [
+                      ColorPalette.primary,
+                      ColorPalette.primary.withOpacity(0),
+                    ],
+                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                )
+              : null,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Visibility(
+                visible: widget.icon.isNotEmpty,
+                child: SizedBox(
+                  width: 44,
+                  height: 44,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(widget.icon),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Visibility(
-            visible: widget.icon.isNotEmpty,
-            child: const SizedBox(width: 6),
-          ),
-          Text(
-            widget.label,
-            style: widget.textStyle.copyWith(
-              color: widget.isSelectedItem ? themeProvider.colorScheme?.primary : themeProvider.colorScheme?.secondary,
-            ),
-          ),
-          Visibility(
-            visible: widget.icon.isNotEmpty,
-            child: const Spacer(),
-          ),
-          Visibility(
-            visible: widget.icon.isNotEmpty,
-            child: RotationTransition(
-              turns: widget.animation == null ? const AlwaysStoppedAnimation(0.0) : widget.animation!,
-              child: Icon(
-                Icons.keyboard_arrow_right_outlined,
-                color: themeProvider.colorScheme?.secondary,
+              const SizedBox(width: 10),
+              Visibility(
+                visible: widget.icon.isNotEmpty,
+                child: const SizedBox(width: 6),
               ),
-            ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.name,
+                    style: widget.textStyle.copyWith(
+                      color: widget.isSelectedItem ? ColorPalette.whitePrimaryColor : ColorPalette.whitePrimaryColor.withOpacity(0.6),
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  SizedBox(
+                   width: constraints.maxWidth - 130,
+                    child: Text(
+                      "Thank you for choosing Rare Rabbit🙂",
+                    maxLines: 1,
+                      softWrap: true,
+                      style: widget.textStyle.copyWith(
+                        overflow: TextOverflow.ellipsis,
+                        color: widget.isSelectedItem ? ColorPalette.whitePrimaryColor : ColorPalette.whitePrimaryColor.withOpacity(0.6),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: widget.icon.isNotEmpty,
+                child: const Spacer(),
+              ),
+              Visibility(
+                visible: widget.icon.isNotEmpty,
+                child: RotationTransition(
+                  turns: widget.animation == null ? const AlwaysStoppedAnimation(0.0) : widget.animation!,
+                  child: Icon(
+                    Icons.keyboard_arrow_right_outlined,
+                    color: ColorPalette.whitePrimaryColor.withOpacity(0.4),
+                  ),
+                ),
+              ),
+              Visibility(visible: widget.icon.isNotEmpty, child: const SizedBox(width: 6)),
+            ],
           ),
-          Visibility(visible: widget.icon.isNotEmpty, child: const SizedBox(width: 6)),
-        ],
-      ),
+        );
+      }
     );
   }
 }

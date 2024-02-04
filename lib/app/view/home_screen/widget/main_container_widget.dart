@@ -1,10 +1,9 @@
+import 'package:snapvalt/app/core/utils/color_palette.dart';
 import 'package:snapvalt/app/core/utils/enums.dart';
 import 'package:snapvalt/app/core/utils/screen_sizes.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
-import 'package:snapvalt/app/view/celebrities_screen/celebrities_screen.dart';
 import 'package:snapvalt/app/view/menu_screen/menu_screen.dart';
 import 'package:snapvalt/app/view/movies_screen/movies_screen.dart';
-import 'package:snapvalt/app/view/tv_series_screen/tv_series_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,9 +32,11 @@ class _MainContainerState extends State<MainContainer> {
     return Container(
       width: maxWidth,
       alignment: Alignment.topCenter,
+      height: widget.maxWidthAndHeight.maxHeight,
       padding: EdgeInsets.all(isDesktopScreen ? 6 : 0),
+      margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
-        color: themeProvider.colorScheme?.primaryContainer,
+        color: ColorPalette.primary,
         borderRadius: isDesktopScreen ? const BorderRadius.all(Radius.circular(20)) : null,
       ),
       child: Row(
@@ -61,56 +62,16 @@ class _MainContainerState extends State<MainContainer> {
             flex: 7,
             child: LayoutBuilder(
               builder: (context, constraints) {
-                switch (widget.mainScreen) {
-                  case MAIN_SCREENS.movies:
-                    return returnMoviesScreen(subScreen: widget.subScreen, maxWidth: widget.maxWidthAndHeight.maxWidth);
-                  case MAIN_SCREENS.tvSeries:
-                    return returnTVSeriesScreen(subScreen: widget.subScreen, maxWidth: widget.maxWidthAndHeight.maxWidth);
-                  case MAIN_SCREENS.celebrities:
-                    return returnCelebScreen(subScreen: widget.subScreen, maxWidth: widget.maxWidthAndHeight.maxWidth);
-                  default:
-                    return returnMoviesScreen(subScreen: widget.subScreen, maxWidth: widget.maxWidthAndHeight.maxWidth);
-                }
-               },
+                return MoviesScreen(
+                  maxWidth: maxWidth,
+                  title: "Tulasi Reddy",
+                  subTitle: "Online",
+                );
+              },
             ),
           ),
         ],
       ),
     );
-  }
-
-  returnMoviesScreen({required SUB_SCREENS subScreen, required double maxWidth}) {
-    switch (subScreen) {
-      case SUB_SCREENS.popular:
-        return MoviesScreen(maxWidth: maxWidth);
-      case SUB_SCREENS.topRated:
-        return MoviesScreen(maxWidth: maxWidth);
-      case SUB_SCREENS.nowPlaying:
-        return MoviesScreen(maxWidth: maxWidth);
-      default:
-        return MoviesScreen(maxWidth: maxWidth);
-    }
-  }
-  returnTVSeriesScreen({required SUB_SCREENS subScreen, required double maxWidth}) {
-    switch (subScreen) {
-      case SUB_SCREENS.popular:
-        return TVSeriesScreen(maxWidth: maxWidth, subScreen: SUB_SCREENS.popular);
-      case SUB_SCREENS.topRated:
-        return TVSeriesScreen(maxWidth: maxWidth, subScreen: SUB_SCREENS.topRated);
-      case SUB_SCREENS.nowPlaying:
-        return TVSeriesScreen(maxWidth: maxWidth, subScreen: SUB_SCREENS.nowPlaying);
-      default:
-        return TVSeriesScreen(maxWidth: maxWidth, subScreen: SUB_SCREENS.popular);
-    }
-  }
-  returnCelebScreen({required SUB_SCREENS subScreen, required double maxWidth}) {
-    switch (subScreen) {
-      case SUB_SCREENS.popular:
-        return CelebritiesScreen(maxWidth: maxWidth);
-      case SUB_SCREENS.topRated:
-        return CelebritiesScreen(maxWidth: maxWidth);
-      default:
-        return CelebritiesScreen(maxWidth: maxWidth);
-    }
   }
 }

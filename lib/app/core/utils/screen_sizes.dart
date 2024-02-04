@@ -13,7 +13,7 @@ double getCardWidth({required double screenWidth}) {
   } else if (screenWidth >= 1400 && screenWidth <= 1600) {
     cardWidth = screenWidth / 1.4;
   } else if (screenWidth >= 1160 && screenWidth <= 1600) {
-    cardWidth = screenWidth / 1.3;
+    cardWidth = screenWidth / 1.1;
   } else if (screenWidth >= 700 && screenWidth <= 1160) {
     cardWidth = screenWidth;
   } else if (screenWidth <= 700) {

@@ -1,3 +1,4 @@
+import 'package:snapvalt/app/core/utils/color_palette.dart';
 import 'package:snapvalt/app/provider/movies_provider.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
 import 'package:snapvalt/app/widget/title_widget.dart';
@@ -5,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MoviesScreen extends StatefulWidget {
-  const MoviesScreen({super.key, required this.maxWidth});
+  const MoviesScreen({super.key, required this.maxWidth, required this.title, required this.subTitle});
 
   final double maxWidth;
+  final String title;
+  final String subTitle;
 
   @override
   State<MoviesScreen> createState() => _MoviesScreenState();
@@ -31,9 +34,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
       return Container(
         alignment: Alignment.topLeft,
         padding: const EdgeInsets.all(20),
-        constraints: const BoxConstraints(minHeight: 500),
+        constraints: const BoxConstraints(minHeight: 600),
         decoration: BoxDecoration(
-          color: themeProvider.colorScheme?.background,
+          color: ColorPalette.primaryContainer,
           borderRadius: isDesktopScreen ? const BorderRadius.all(Radius.circular(14)) : null,
         ),
         child: Column(
@@ -43,9 +46,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
           children: [
             TitleWidget(
               isDesktopScreen: isDesktopScreen,
-              title: "Movies",
-              subTitle: "Popular Movies",
+              title: widget.title,
+              subTitle: widget.subTitle,
             ),
+            Divider(color: ColorPalette.blackPrimaryColor.shade100.withOpacity(0.4)),
             const SizedBox(height: 20),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),

@@ -1,9 +1,17 @@
+import 'package:snapvalt/app/core/utils/assets_path.dart';
+import 'package:snapvalt/app/core/utils/color_palette.dart';
+import 'package:snapvalt/app/core/utils/constants.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({super.key, required this.isDesktopScreen, required this.title, required this.subTitle});
+  const TitleWidget({
+    super.key,
+    required this.isDesktopScreen,
+    required this.title,
+    required this.subTitle,
+  });
 
   final bool isDesktopScreen;
   final String title;
@@ -12,19 +20,56 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            title,
-            style: themeProvider.titleBig?.copyWith(fontSize: isDesktopScreen ? 20 : 18),
+          const SizedBox(
+            width: 40,
+            height: 40,
+            child: CircleAvatar(
+              backgroundImage: ExactAssetImage(Assets.girl),
+            ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            subTitle,
-            style: themeProvider.titleMedium?.copyWith(fontSize: isDesktopScreen ? 16 : 12),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: themeProvider.titleBig?.copyWith(
+                  fontSize: isDesktopScreen ? 14 : 12,
+                  color: ColorPalette.whitePrimaryColor,
+                  fontFamily: Constants.montserratRegular,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorPalette.green,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    subTitle,
+                    style: themeProvider.titleMedium?.copyWith(
+                      fontSize: isDesktopScreen ? 12 : 12,
+                      color: ColorPalette.whitePrimaryColor.withOpacity(0.4),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       );
