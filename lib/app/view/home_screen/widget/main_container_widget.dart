@@ -23,6 +23,26 @@ class MainContainer extends StatefulWidget {
   State<MainContainer> createState() => _MainContainerState();
 }
 
+int getUsersListScreenSize(maxSize){
+  int size = 3;
+  if(maxSize <= 800){
+    size = 4;
+  } if(maxSize <= 600){
+    size = 5;
+  }
+  return size;
+}
+
+int getChatScreenSize(maxSize){
+  int size = 7;
+  if(maxSize <= 800){
+    size = 6;
+  } if(maxSize <= 600){
+    size = 5;
+  }
+  return size;
+}
+
 class _MainContainerState extends State<MainContainer> {
   @override
   Widget build(BuildContext context) {
@@ -43,31 +63,31 @@ class _MainContainerState extends State<MainContainer> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(
-            visible: maxWidth >= 700,
-            child: Expanded(
-              flex: maxWidth <= 800 ? 4 : 3,
-              child: Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.only(top: 20, left: 14),
-                child: MenuScreen(
-                  maxWidth: widget.maxWidthAndHeight.maxWidth,
-                  mainScreens: widget.mainScreen,
-                  subScreen: widget.subScreen,
-                ),
+          Expanded(
+            flex: getUsersListScreenSize(maxWidth),
+            child: Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.only(top: 20, left: 14),
+              child: UsersListScreen(
+                maxWidth: widget.maxWidthAndHeight.maxWidth,
+                mainScreens: widget.mainScreen,
+                subScreen: widget.subScreen,
               ),
             ),
           ),
-          Expanded(
-            flex: 7,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return ChatScreen(
-                  maxWidth: maxWidth,
-                  title: "Tulasi Reddy",
-                  subTitle: "Online",
-                );
-              },
+          Visibility(
+            visible: maxWidth >= 450,
+            child: Expanded(
+              flex: getChatScreenSize(maxWidth),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ChatScreen(
+                    maxWidth: maxWidth,
+                    title: "Tulasi Reddy",
+                    subTitle: "Online",
+                  );
+                },
+              ),
             ),
           ),
         ],

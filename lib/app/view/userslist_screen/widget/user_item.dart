@@ -3,12 +3,12 @@ import 'package:snapvalt/app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MenuItem extends StatefulWidget {
-  const MenuItem({
+class UserItem extends StatefulWidget {
+  const UserItem({
     super.key,
     required this.name,
     required this.isSelectedItem,
-    this.icon = "",
+    required this.icon,
     this.margin = EdgeInsets.zero,
     required this.textStyle,
     this.animation,
@@ -22,10 +22,10 @@ class MenuItem extends StatefulWidget {
   final Animation<double>? animation;
 
   @override
-  State<MenuItem> createState() => _MenuItemState();
+  State<UserItem> createState() => _UserItemState();
 }
 
-class _MenuItemState extends State<MenuItem> {
+class _UserItemState extends State<UserItem> {
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);

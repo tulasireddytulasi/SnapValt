@@ -10,14 +10,14 @@ import 'package:snapvalt/app/core/utils/screen_sizes.dart';
 import 'package:snapvalt/app/model/user_list_model.dart';
 import 'package:snapvalt/app/provider/menu_provider.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
-import 'package:snapvalt/app/view/menu_screen/widget/menu_item.dart';
+import 'package:snapvalt/app/view/userslist_screen/widget/user_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({
+class UsersListScreen extends StatefulWidget {
+  const UsersListScreen({
     super.key,
     required this.maxWidth,
     required this.mainScreens,
@@ -30,10 +30,10 @@ class MenuScreen extends StatefulWidget {
   final bool isMobileScreen;
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  State<UsersListScreen> createState() => _UsersListScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
+class _UsersListScreenState extends State<UsersListScreen> with TickerProviderStateMixin {
   late MenuProvider menuProvider;
   late UserListModel userListModel;
 
@@ -141,7 +141,7 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
                           GoRouter.of(context).go(mainScreen);
                           menuProvider.setSelectedMenuIndex = index;
                         },
-                        child: MenuItem(
+                        child: UserItem(
                           name: name,
                           isSelectedItem: isSelectedItem,
                           icon: icon,
