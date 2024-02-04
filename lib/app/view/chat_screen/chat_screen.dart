@@ -5,18 +5,18 @@ import 'package:snapvalt/app/widget/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MoviesScreen extends StatefulWidget {
-  const MoviesScreen({super.key, required this.maxWidth, required this.title, required this.subTitle});
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key, required this.maxWidth, required this.title, required this.subTitle});
 
   final double maxWidth;
   final String title;
   final String subTitle;
 
   @override
-  State<MoviesScreen> createState() => _MoviesScreenState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _MoviesScreenState extends State<MoviesScreen> {
+class _ChatScreenState extends State<ChatScreen> {
   final String keyButtonContinue = "create_button_continue";
   late ThemeProvider themeProvider;
   int customWidget = 1;

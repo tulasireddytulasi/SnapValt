@@ -2,8 +2,8 @@ import 'package:snapvalt/app/core/utils/color_palette.dart';
 import 'package:snapvalt/app/core/utils/enums.dart';
 import 'package:snapvalt/app/core/utils/screen_sizes.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
+import 'package:snapvalt/app/view/chat_screen/chat_screen.dart';
 import 'package:snapvalt/app/view/menu_screen/menu_screen.dart';
-import 'package:snapvalt/app/view/movies_screen/movies_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +62,7 @@ class _MainContainerState extends State<MainContainer> {
             flex: 7,
             child: LayoutBuilder(
               builder: (context, constraints) {
-                return MoviesScreen(
+                return ChatScreen(
                   maxWidth: maxWidth,
                   title: "Tulasi Reddy",
                   subTitle: "Online",
