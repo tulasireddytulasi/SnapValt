@@ -3,7 +3,7 @@ import 'package:snapvalt/app/core/utils/enums.dart';
 import 'package:snapvalt/app/core/utils/screen_sizes.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
 import 'package:snapvalt/app/view/chat_screen/chat_screen.dart';
-import 'package:snapvalt/app/view/menu_screen/menu_screen.dart';
+import 'package:snapvalt/app/view/userslist_screen/user_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

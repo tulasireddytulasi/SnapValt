@@ -1,14 +1,11 @@
-import 'package:snapvalt/app/core/utils/assets_path.dart';
 import 'package:snapvalt/app/core/utils/enums.dart';
 import 'package:snapvalt/app/provider/movies_provider.dart';
-import 'package:snapvalt/app/view/home_screen/widget/desktop_app_bar.dart';
 import 'package:snapvalt/app/view/home_screen/widget/main_container_widget.dart';
-import 'package:snapvalt/app/view/menu_screen/menu_screen.dart';
+import 'package:snapvalt/app/view/userslist_screen/user_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:snapvalt/app/core/utils/color_palette.dart';
 import 'package:snapvalt/app/core/utils/screen_sizes.dart';
 import 'package:snapvalt/app/widget/app_icon_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
