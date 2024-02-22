@@ -1,6 +1,14 @@
+import 'dart:convert';
+
+import 'package:snapvalt/app/core/utils/assets_path.dart';
 import 'package:snapvalt/app/core/utils/color_palette.dart';
+import 'package:snapvalt/app/core/utils/dummy_data/users_list_data.dart';
+import 'package:snapvalt/app/core/utils/enums.dart';
+import 'package:snapvalt/app/model/messages_model.dart';
 import 'package:snapvalt/app/provider/movies_provider.dart';
 import 'package:snapvalt/app/provider/theme_provider.dart';
+import 'package:snapvalt/app/view/chat_screen/widget/custom_text_widget.dart';
+import 'package:snapvalt/app/view/chat_screen/widget/text_Image_widget.dart';
 import 'package:snapvalt/app/widget/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,23 +28,25 @@ class _ChatScreenState extends State<ChatScreen> {
   final String keyButtonContinue = "create_button_continue";
   late ThemeProvider themeProvider;
   int customWidget = 1;
+  late UserMessagesModel userMessagesModel;
 
   @override
   void initState() {
     super.initState();
     themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    userMessagesModel = userMessagesModelFromJson(json.encode(UserDummyData.couplesMessages));
   }
 
   @override
   Widget build(BuildContext context) {
     bool isDesktopScreen = widget.maxWidth >= 652;
-    return Consumer<MoviesProvider>(builder: (context, MoviesProvider, child) {
+    return Consumer<MoviesProvider>(builder: (context, moviesProvider, child) {
       return Container(
         alignment: Alignment.topLeft,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         constraints: const BoxConstraints(minHeight: 600),
         decoration: BoxDecoration(
-          color: ColorPalette.primaryContainer,
+          color: ColorPalette.primary,
           borderRadius: isDesktopScreen ? const BorderRadius.all(Radius.circular(14)) : null,
         ),
         child: Column(
@@ -50,26 +60,34 @@ class _ChatScreenState extends State<ChatScreen> {
               subTitle: widget.subTitle,
             ),
             Divider(color: ColorPalette.blackPrimaryColor.shade100.withOpacity(0.4)),
-            const SizedBox(height: 20),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              transitionBuilder: (child, animation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: child,
-                );
-              },
-              child: const Column(
-                children: [
-                  // MoviesProvider.currentWidget == 1
-                  //     ? Widget1(
-                  //         maxWidth: widget.maxWidth,
-                  //       )
-                  //     : const SizedBox.shrink(),
-                ],
+            const SizedBox(height: 4),
+            Expanded(
+              child: ListView.separated(
+                itemCount: userMessagesModel.messages?.length ?? 0,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 14);
+                },
+                itemBuilder: (context, index) {
+                  if ((userMessagesModel.messages?[index].type ?? "") == Types.text.name) {
+                    return ChatTextWidget(
+                      isUser: userMessagesModel.messages?[index].isUser ?? false,
+                      text: userMessagesModel.messages?[index].messageText ?? "",
+                    );
+                  } else if ((userMessagesModel.messages?[index].type ?? "") == Types.imageText.name) {
+                    return ImageTextWidget(
+                      isUser: userMessagesModel.messages?[index].isUser ?? false,
+                      text: userMessagesModel.messages?[index].messageText ?? "",
+                      image: userMessagesModel.messages?[index].file ?? "",
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 4),
           ],
         ),
       );

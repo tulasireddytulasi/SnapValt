@@ -18,6 +18,20 @@ class ColorPalette {
     },
   );
 
+
+
+  static const MaterialColor blackColor = MaterialColor(
+    0xFF111217,
+    {
+      500: Color(0xFF111217),
+      400: Color(0xFF252525),
+      300: Color(0xFF1e1e1e),
+      200: Color(0xFF434343),
+      100: Color(0xFFD9D9D9),
+      50: Color(0xFFFBEFFC),
+    },
+  );
+
   static const MaterialColor blackPrimaryColor = MaterialColor(
     0xFF000000,
     {
@@ -40,9 +54,11 @@ class ColorPalette {
   );
 
   static const Color red = Color(0xFFEB1C1C);
-  static const Color primary = Color(0xFF272b34);
-  static const Color primaryContainer = Color(0xff2e333d);
+  static const Color primary = Color(0xFF111217);
+  static const Color primaryContainer = Color(0xFF252525);
   static const Color primaryContainer2 = Color(0xff2b3039);
   static const Color green = Color(0xFF54c251);
+  static const Color purple = Color(0xFF9558b7);
+
 
 }

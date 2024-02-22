@@ -56,7 +56,7 @@ class _MainContainerState extends State<MainContainer> {
       padding: EdgeInsets.all(isDesktopScreen ? 6 : 0),
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
-        color: ColorPalette.primary,
+        color: ColorPalette.primaryContainer,
         borderRadius: isDesktopScreen ? const BorderRadius.all(Radius.circular(20)) : null,
       ),
       child: Row(
